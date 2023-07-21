@@ -24,18 +24,18 @@ wordList = ["hello", "world", "goodbye", "sanity"]
 tableHeader = ["Orthography", "IPA", "V", "CV", "VC", "CVC", "Other"]
 
 # Start new JVM instance with Phon classpath
-jpype.startJVM("-ea", classpath=[PHON_LIB + "/*"], convertStrings=True)
+jpype.startJVM("-Dfile.encoding=UTF-8", classpath=[PHON_LIB + "/*"], convertStrings=True)
 if jpype.isJVMStarted():
     # load english IPA dictionary
     IPADictionaryLibrary = JClass("ca.phon.ipadictionary.IPADictionaryLibrary")
     engDict = IPADictionaryLibrary.getInstance().dictionariesForLanguage("eng").get(0)
 
-    # load english syllabifier
+    # # load english syllabifier
     SyllabifierLibrary = JClass("ca.phon.syllabifier.SyllabifierLibrary")
     engSyllabifier = SyllabifierLibrary.getInstance().getSyllabifierForLanguage("eng-simple")
 
     IPATranscript = JClass("ca.phon.ipa.IPATranscript")
-    with open('syllables.csv', 'w') as csvfile:
+    with open('syllables.csv', 'w', newline='', encoding="UTF8") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(tableHeader)
         for word in wordList:
@@ -65,7 +65,7 @@ if jpype.isJVMStarted():
                     else:
                         other += (" " if len(other) > 0 else "") + syllable.toString()
 
-                row = [word, ipa, v, cv, vc, cvc, other]
+                row = [word, option, v, cv, vc, cvc, other]
                 writer.writerow(row)
 
     jpype.shutdownJVM()
