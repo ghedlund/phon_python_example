@@ -35,10 +35,11 @@ if jpype.isJVMStarted():
     engSyllabifier = SyllabifierLibrary.getInstance().getSyllabifierForLanguage("eng-simple")
 
     IPATranscript = JClass("ca.phon.ipa.IPATranscript")
-    with open('syllables.csv', 'w', newline='', encoding="UTF8") as csvfile:
+    with open('syllables.csv', 'w', newline='', encoding="UTF-8") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(tableHeader)
         for word in wordList:
+            # Lookup list of available IPA transcription in our dictionary
             options = engDict.lookup(word)
             for option in options:
                 # Parse transcription
