@@ -30,7 +30,7 @@ if jpype.isJVMStarted():
     IPADictionaryLibrary = JClass("ca.phon.ipadictionary.IPADictionaryLibrary")
     engDict = IPADictionaryLibrary.getInstance().dictionariesForLanguage("eng").get(0)
 
-    # # load english syllabifier
+    # load english syllabifier
     SyllabifierLibrary = JClass("ca.phon.syllabifier.SyllabifierLibrary")
     engSyllabifier = SyllabifierLibrary.getInstance().getSyllabifierForLanguage("eng-simple")
 
