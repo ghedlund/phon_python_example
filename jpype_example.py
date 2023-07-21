@@ -11,7 +11,6 @@
 #
 import platform
 import csv
-import sys
 
 import jpype.imports
 from jpype import *
